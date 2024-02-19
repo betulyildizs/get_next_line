@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: beyildiz <beyildiz@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/18 15:07:56 by beyildiz          #+#    #+#             */
+/*   Updated: 2024/02/18 15:07:56 by beyildiz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	ft_bzero(void *s, size_t n)
@@ -14,14 +26,16 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-size_t  ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-    int i = 0;
-    while(*str)
-    {
-        i++;
-    }
-    return (i);
+	int	i;
+
+	i = 0;
+	while (*str)
+	{
+		i++;
+	}
+	return (i);
 }
 
 void	*ft_calloc(size_t nbr, size_t size)
@@ -43,12 +57,14 @@ void	*ft_calloc(size_t nbr, size_t size)
 	return (result);
 }
 
-char    *ft_strchr(char *str, char c)
+char	*ft_strchr(char *str, char c)
 {
-    while (*str != (unsigned char)c)
+	while (*str != (unsigned char)c)
+	{
 		if (!*str++)
 			return (0);
-	return ((char *)str);
+	}
+	return (str);
 }
 
 char	*ft_strjoin(const char *str1, const char *str2)
