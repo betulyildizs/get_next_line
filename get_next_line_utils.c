@@ -3,92 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beyildiz <beyildiz@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 15:07:56 by beyildiz          #+#    #+#             */
-/*   Updated: 2024/02/18 15:07:56 by beyildiz         ###   ########.fr       */
+/*   Created: 2022/11/08 12:04:44 by roramos           #+#    #+#             */
+/*   Updated: 2022/11/11 18:20:39 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = '\0';
-		i++;
-	}
-}
-
-size_t	ft_strlen(char *str)
+int	ft_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
-	while (*str)
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }
 
-void	*ft_calloc(size_t nbr, size_t size)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	newsize;
-	void	*result;
+	char	*str;
 
-	if (nbr == 0 || size == 0)
+	str = (char *)s;
+	while (*str != c)
 	{
-		nbr = 1;
-		size = 1;
-	}
-	newsize = nbr * size;
-	result = malloc(newsize);
-	if (result == NULL)
-		return (0);
-	else
-		ft_bzero(result, newsize);
-	return (result);
-}
-
-char	*ft_strchr(char *str, char c)
-{
-	while (*str != (unsigned char)c)
-	{
-		if (!*str++)
-			return (0);
+		if (*str == '\0')
+			return (NULL);
+		str++;
 	}
 	return (str);
 }
 
-char	*ft_strjoin(const char *str1, const char *str2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*r;
-	int		i;
-	int		j;
+	char	*start;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	r = malloc((ft_strlen(str1) + ft_strlen(str2)) * sizeof(char) + 1);
-	if (!r || !str1 || !str2)
-		return (0);
-	while (str1[i])
-	{
-		r[i] = str1[i];
-		i++;
-	}
-	while (str2[j])
-	{
-		r[i] = str2[j];
-		i++;
-		j++;
-	}
-	r[i] = '\0';
-	return (r);
+	if (!s1 || !s2)
+		return (NULL);
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	start = str;
+	while (*s1)
+		*str++ = *s1++;
+	while (*s2)
+		*str++ = *s2++;
+	*str = '\0';
+	return (start);
+}
+
+void	ft_bzero(void *s, unsigned int n)
+{
+	unsigned char	*p;
+
+	p = s;
+	while (n--)
+		*p++ = '\0';
+}
+
+void	*ft_calloc(unsigned int count, unsigned int size)
+{
+	void	*pointer;
+
+	pointer = malloc(count * size);
+	if (!pointer)
+		return (NULL);
+	ft_bzero(pointer, size * count);
+	return (pointer);
 }
