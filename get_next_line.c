@@ -1,35 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: beyildiz <beyildiz@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/13 14:27:46 by beyildiz          #+#    #+#             */
+/*   Updated: 2024/03/13 15:54:28 by beyildiz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char	*ft_join_and_free(char *line, char *buffer)
+char	*ft_join_and_free(char *text, char *buffer)
 {
 	char	*temp;
 
-	temp = ft_strjoin(line, buffer);
-	free(line);
+	temp = ft_strjoin(text, buffer);
+	free(text);
 	return (temp);
 }
 
-char	*get_first_line(int fd, char *line)
+char	*read_first_line(int fd, char *line)
 {
 	char	*buffer;
-	int		read;
+	int		bytes_read;
 
 	if (!line)
 		line = ft_calloc(1, 1);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	read = 1;
-	while (read > 0)
+	bytes_read = 1;
+	while (bytes_read > 0)
 	{
-		read = read(fd, buffer, BUFFER_SIZE);
-		if (read == -1)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
 		{
 			free (line);
 			free (buffer);
 			return (NULL);
 		}
-		buffer[read] = 0;
+		buffer[bytes_read] = 0;
 		line = ft_join_and_free(line, buffer);
 		if (ft_strchr(line, '\n'))
 			break ;
@@ -60,7 +72,7 @@ char	*get_line(char *line)
 	return (str);
 }
 
-char	*clean_first_line(char *text)
+char	*clean_first_line(char *line)
 {
 	int		i;
 	int		j;
@@ -92,25 +104,10 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = get_first_line(fd, line);
+	line = read_first_line(fd, line);
 	if (!line)
 		return (NULL);
 	output_line = get_line(line);
-	line = clear_first_line(line);
+	line = clean_first_line(line);
 	return (output_line);
 }
-
-/* int main()
-{
-	int fd = open("a.txt", O_RDONLY);
-	char *a;
-
-	while ((a = get_next_line(fd)))
-	{
-		printf("%s", a);
-	}
-
-	// printf("%s", get_next_line(fd));
-
-	return 0;
-} */

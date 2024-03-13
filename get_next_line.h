@@ -1,8 +1,20 @@
-#ifndef  GET_NEXT_LINE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: beyildiz <beyildiz@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/13 14:27:51 by beyildiz          #+#    #+#             */
+/*   Updated: 2024/03/13 14:28:18 by beyildiz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define  BUFFER_SIZE 42
+#  define BUFFER_SIZE 1234
 # endif
 
 # include <unistd.h>
