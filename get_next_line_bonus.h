@@ -16,7 +16,7 @@ int		ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*read_first_line(int fd, char *line);
 char	*get_line(char *line);
-char	*clean_first_line(char *line);
+char	*clear_first_line(char *line);
 int		ft_get_index_of(char *s1, char *s2);
 char	*ft_itoa(int n);
 void	*ft_calloc(unsigned int count, unsigned int size);
