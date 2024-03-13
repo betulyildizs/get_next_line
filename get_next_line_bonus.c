@@ -60,7 +60,7 @@ char	*get_line(char *line)
 	return (str);
 }
 
-char	*clean_first_line(char *line)
+char	*clear_first_line(char *line)
 {
 	int		i;
 	int		j;
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	if (!line[fd])
 		return (NULL);
 	output_line = get_line(line[fd]);
-	line[fd] = clean_first_line(line[fd]);
+	line[fd] = clear_first_line(line[fd]);
 	return (output_line);
 }
 
